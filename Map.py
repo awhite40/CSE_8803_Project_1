@@ -8,35 +8,108 @@ map = np.empty((1600, 1600,)) * np.NAN
 # Creating pathway to MARTA
 
 # 1st crosswalk
-##CW1 = np.ones((4,38,))
-map[800:804,800:842] = 1
+
+M_cw1_S_x = 800
+M_cw1_S_y = 800
+M_cw1_E_x = M_cw1_S_x + 4
+M_cw1_E_y = M_cw1_S_y + 42
+
+print M_cw1_E_x, M_cw1_E_y
+#M_cw1_E = (M_cw1_S[0] + 4, M_cw1_S[1] + 42)
+map[M_cw1_S_x:M_cw1_E_x, M_cw1_S_y:M_cw1_E_y] = 1
+
 # 1st Sidewalk
-##SW1 = np.ones((5,176,))
-map[800:805,842:1018] = 1
+
+M_sw1_S_x = M_cw1_S_x
+M_sw1_S_y = M_cw1_E_y
+M_sw1_E_x = M_sw1_S_x + 5
+M_sw1_E_y = M_sw1_S_y + 176
+
+print M_sw1_S_x, M_sw1_S_y, M_sw1_E_x, M_sw1_E_y
+map[M_sw1_S_x:M_sw1_E_x, M_sw1_S_y:M_sw1_E_y] = 1
+
 # 2nd Crosswalk
-map[800:804,1018:1037] = 1
+M_cw2_S_x = M_sw1_S_x
+M_cw2_S_y = M_sw1_E_y
+M_cw2_E_x = M_cw2_S_x + 4
+M_cw2_E_y = M_cw2_S_y + 19
+
+map[M_cw2_S_x:M_cw2_E_x, M_cw2_S_y:M_cw2_E_y] = 1
+
 # 2nd Sidewalk part 1 - up to Varsity
-map[799:805,1037:1232] = 1
+M_sw2_S_x = M_cw2_S_x - 1
+M_sw2_S_y = M_cw2_E_y
+M_sw2_E_x = M_sw2_S_x + 6
+M_sw2_E_y = M_sw2_S_y + 195
+map[M_sw2_S_x:M_sw2_E_x, M_sw2_S_y:M_sw2_E_y] = 1
+
+
 # 2nd Sidewalk part 2
-map[799:805,1232:1299] = 1
+
+M_sw2b_S_x = M_sw2_S_x
+M_sw2b_S_y = M_sw2_E_y
+M_sw2b_E_x = M_sw2b_S_x + 6
+M_sw2b_E_y = M_sw2b_S_y + 67
+map[M_sw2b_S_x:M_sw2b_E_x, M_sw2b_S_y:M_sw2b_E_y] = 1
+
 # 3rd Crosswalk
-map[800:804, 1299:1314] = 1
+M_cw3_S_x = M_sw2b_S_x + 1
+M_cw3_S_y = M_sw2b_E_y
+M_cw3_E_x = M_cw3_S_x + 4
+M_cw3_E_y = M_cw3_S_y + 15
+
+map[M_cw3_S_x:M_cw3_E_x, M_cw3_S_y:M_cw3_E_y] = 1
+
 # 3rd Sidewalk
-map[799:805, 1314:1531] = 1
+M_sw3_S_x = M_cw3_S_x - 1
+M_sw3_S_y = M_cw3_E_y
+M_sw3_E_x = M_sw3_S_x + 6
+M_sw3_E_y = M_sw3_S_y + 217
+map[M_sw3_S_x:M_sw3_E_x, M_sw3_S_y:M_sw3_E_y] = 1
+
 # 4th Crosswalk
-map[800:804, 1531:1558] = 1
+M_cw4_S_x = M_sw3_S_x + 1
+M_cw4_S_y = M_sw3_E_y
+M_cw4_E_x = M_cw4_S_x + 4
+M_cw4_E_y = M_cw4_S_y + 27
+
+map[M_cw4_S_x:M_cw4_E_x, M_cw4_S_y:M_cw4_E_y] = 1
+
 
 
 # Creating Pathway to NorthAve Apartments
 
-#1st crosswalk - 32 spaces south
-map[804:836,800:804] = 1
+# 1st crosswalk - 32 spaces south
+N_cw1_S_x = M_cw1_S_x + 4
+N_cw1_S_y = 800
+N_cw1_E_x = M_cw1_S_x + 32
+N_cw1_E_y = M_cw1_S_y + 4
+
+map[N_cw1_S_x:N_cw1_E_x, N_cw1_S_y:N_cw1_E_y] = 1
+
+
 # 2nd Crosswalk - 42 spaces East
-map[836:840,800:842] = 1
+N_cw2_S_x = N_cw1_E_x
+N_cw2_S_y = N_cw1_S_y
+N_cw2_E_x = N_cw2_S_x + 4
+N_cw2_E_y = N_cw2_S_y + 42
+print N_cw2_E_x, N_cw2_E_y
+map[N_cw2_S_x:N_cw2_E_x, N_cw2_S_y:N_cw2_E_y] = 1
+
+
 # Sidewalk 185 spaces south
-map[840:1028,842:845] = 1
+N_sw1_S_x = N_cw2_S_x
+N_sw1_S_y = N_cw2_E_y
+N_sw1_E_x = N_sw1_S_x + 189
+N_sw1_E_y = N_sw1_S_y + 3
+map[N_sw1_S_x:N_sw1_E_x, N_sw1_S_y:N_sw1_E_y] = 1
+
 # Drive to gate - 60 spaces east
-map[1024:1028,845:905] = 1
+N_sw2_S_x = N_sw1_E_x
+N_sw2_S_y = N_sw1_S_y
+N_sw2_E_x = N_sw2_S_x + 4
+N_sw2_E_y = N_sw2_S_y + 60
+map[N_sw2_S_x:N_sw2_E_x, N_sw2_S_y:N_sw2_E_y] = 1
 
 # Other side of street to Marta
 # sidewalk 1
