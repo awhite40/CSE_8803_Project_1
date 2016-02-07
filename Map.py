@@ -14,7 +14,7 @@ M_cw1_S_y = 800
 M_cw1_E_x = M_cw1_S_x + 4
 M_cw1_E_y = M_cw1_S_y + 42
 
-print M_cw1_E_x, M_cw1_E_y
+#print M_cw1_E_x, M_cw1_E_y
 #M_cw1_E = (M_cw1_S[0] + 4, M_cw1_S[1] + 42)
 map[M_cw1_S_x:M_cw1_E_x, M_cw1_S_y:M_cw1_E_y] = 0
 
@@ -25,7 +25,7 @@ M_sw1_S_y = M_cw1_E_y
 M_sw1_E_x = M_sw1_S_x + 5
 M_sw1_E_y = M_sw1_S_y + 176
 
-print M_sw1_S_x, M_sw1_S_y, M_sw1_E_x, M_sw1_E_y
+#print M_sw1_S_x, M_sw1_S_y, M_sw1_E_x, M_sw1_E_y
 map[M_sw1_S_x:M_sw1_E_x, M_sw1_S_y:M_sw1_E_y] = 0
 
 # 2nd Crosswalk
@@ -80,10 +80,10 @@ map[M_cw4_S_x:M_cw4_E_x, M_cw4_S_y:M_cw4_E_y] = 0
 # Creating Pathway to NorthAve Apartments
 
 # 1st crosswalk - 32 spaces south
-N_cw1_S_x = M_cw1_S_x + 4
-N_cw1_S_y = 800
-N_cw1_E_x = M_cw1_S_x + 32
-N_cw1_E_y = M_cw1_S_y + 4
+N_cw1_S_x = M_cw1_S_x
+N_cw1_S_y = 800 - 4
+N_cw1_E_x = N_cw1_S_x + 32
+N_cw1_E_y = N_cw1_S_y + 4
 
 map[N_cw1_S_x:N_cw1_E_x, N_cw1_S_y:N_cw1_E_y] = 0
 
@@ -93,7 +93,7 @@ N_cw2_S_x = N_cw1_E_x
 N_cw2_S_y = N_cw1_S_y
 N_cw2_E_x = N_cw2_S_x + 4
 N_cw2_E_y = N_cw2_S_y + 42
-print N_cw2_E_x, N_cw2_E_y
+#print N_cw2_E_x, N_cw2_E_y
 map[N_cw2_S_x:N_cw2_E_x, N_cw2_S_y:N_cw2_E_y] = 0
 
 
@@ -126,6 +126,42 @@ map[835:841,1314:1531] = 0
 map[836:840,1531:1558] = 0
 
 
+
+# Bobby Dodd Statium Sidewalks -
+# East side  headed north 8 squares wide 457 long
+BD_E_E_x = 800
+BD_E_E_y = 800
+BD_E_S_x = BD_E_E_x - 457
+BD_E_S_y = BD_E_E_y - 8
+print BD_E_S_y, BD_E_S_x
+map[BD_E_S_x:BD_E_E_x, BD_E_S_y:BD_E_E_y] = 0
+
+# South Side  - 4 squares wide 505 long small parking lot at 408
+BD_S_E_x = 804
+BD_S_E_y = 800
+BD_S_S_x = BD_E_E_x - 4
+BD_S_S_y = BD_E_E_y - 505
+print BD_S_S_y, BD_S_S_x
+map[BD_S_S_x:BD_S_E_x, BD_S_S_y:BD_S_E_y] = 0
+
+
+# West side - no sidewalk
+#Cherry Street 4 squares wide up to bobby dodd way 457
+Cherry_E_x = BD_S_S_x
+Cherry_E_y = BD_S_S_y + 4
+Cherry_S_x = Cherry_E_x - 457
+Cherry_S_y = Cherry_E_y - 4
+print 'Start', Cherry_S_y, Cherry_S_x, 'End', Cherry_E_y, Cherry_E_x
+map[Cherry_S_x:Cherry_E_x, Cherry_S_y:Cherry_E_y] = 0
+
+
+#North side - Bobby Dodd way 5 squares wide 505 long to cherry
+BD_N_E_x = BD_E_S_x + 4
+BD_N_E_y = BD_E_S_y +  8
+BD_N_S_x = BD_N_E_x - 5
+BD_N_S_y = BD_N_E_y - 505
+print BD_N_S_y, BD_N_S_x
+map[BD_N_S_x:BD_N_E_x, BD_N_S_y:BD_N_E_y] = 0
 
 plt.imshow(map)
 plt.colorbar()
