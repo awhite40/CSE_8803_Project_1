@@ -163,6 +163,39 @@ BD_N_S_y = BD_N_E_y - 505
 print BD_N_S_y, BD_N_S_x
 map[BD_N_S_x:BD_N_E_x, BD_N_S_y:BD_N_E_y] = 0
 
+
+#Exit locations
+
+# Marta
+M1 = M_cw4_S_x - 40
+M2 = M_cw4_S_x
+M3 = M_cw4_E_y
+M4 = M_cw4_E_y + 40
+print M1, M2, M3, M4
+map[M1:M2, M3:M4] = 50
+plt.text(M3, M1, 'Marta')
+
+# Varsity
+V1 = M_sw2_S_x - 40
+V2 = M_sw2_S_x
+V3 = M_sw2_E_y
+V4 = M_sw2_E_y + 40
+print V1, V2, V3, V4
+map[V1:V2, V3:V4] = 50
+plt.text(V3, V1, 'Varsity')
+
+# North Ave
+NA1 = N_sw2_S_x - 40
+NA2 = N_sw2_S_x
+NA3 = N_sw2_E_y
+NA4 = N_sw2_E_y + 40
+print NA1, NA2, NA3, NA4
+map[NA1:NA2, NA3:NA4] = 50
+plt.text(NA3, NA1, 'North Ave Apt')
+
 plt.imshow(map)
-plt.colorbar()
+#plt.colorbar()
+labels = ('Red - Locations \n'
+          'Blue - Sidewalks')
+plt.text(1650,600,labels)
 plt.show()
