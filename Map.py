@@ -20,6 +20,19 @@ M_cw1_E_y = M_cw1_S_y + 42
 #M_cw1_E = (M_cw1_S[0] + 4, M_cw1_S[1] + 42)
 map[M_cw1_S_x:M_cw1_E_x, M_cw1_S_y:M_cw1_E_y] = 0
 
+Mcw1_loc = [(M_cw1_S_x,M_cw1_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=41:
+        num = M_cw1_S_x + i
+        num2 = M_cw1_S_y +j
+        Mcw1_new = (num,num2)
+        Mcw1_loc.append(Mcw1_new)
+        j=j+1
+    i=i+1
+
+#print Mcw1_loc
 # 1st Sidewalk
 
 M_sw1_S_x = M_cw1_S_x
@@ -37,6 +50,19 @@ M_cw2_E_x = M_cw2_S_x + 4
 M_cw2_E_y = M_cw2_S_y + 19
 
 map[M_cw2_S_x:M_cw2_E_x, M_cw2_S_y:M_cw2_E_y] = 0
+
+Mcw2_loc = [(M_cw2_S_x,M_cw2_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=18:
+        num = M_cw2_S_x + i
+        num2 = M_cw2_S_y +j
+        Mcw2_new = (num,num2)
+        Mcw2_loc.append(Mcw2_new)
+        j=j+1
+    i=i+1
+
 
 # 2nd Sidewalk part 1 - up to Varsity
 M_sw2_S_x = M_cw2_S_x - 1
@@ -62,6 +88,19 @@ M_cw3_E_y = M_cw3_S_y + 15
 
 map[M_cw3_S_x:M_cw3_E_x, M_cw3_S_y:M_cw3_E_y] = 0
 
+Mcw3_loc = [(M_cw3_S_x,M_cw3_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=14:
+        num = M_cw3_S_x + i
+        num2 = M_cw3_S_y +j
+        Mcw3_new = (num,num2)
+        Mcw3_loc.append(Mcw3_new)
+        j=j+1
+    i=i+1
+
+
 # 3rd Sidewalk
 M_sw3_S_x = M_cw3_S_x - 1
 M_sw3_S_y = M_cw3_E_y
@@ -77,6 +116,17 @@ M_cw4_E_y = M_cw4_S_y + 27
 
 map[M_cw4_S_x:M_cw4_E_x, M_cw4_S_y:M_cw4_E_y] = 0
 
+Mcw4_loc = [(M_cw4_S_x,M_cw4_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=26:
+        num = M_cw4_S_x + i
+        num2 = M_cw4_S_y +j
+        Mcw4_new = (num,num2)
+        Mcw4_loc.append(Mcw4_new)
+        j=j+1
+    i=i+1
 
 
 # Creating Pathway to NorthAve Apartments
@@ -89,6 +139,18 @@ N_cw1_E_y = N_cw1_S_y + 4
 
 map[N_cw1_S_x:N_cw1_E_x, N_cw1_S_y:N_cw1_E_y] = 0
 
+Ncw1_loc = [(N_cw1_S_x,N_cw1_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=31:
+        num = N_cw1_S_x + j
+        num2 = N_cw1_S_y + i
+        Ncw1_new = (num,num2)
+        Ncw1_loc.append(Ncw1_new)
+        j=j+1
+    i=i+1
+
 
 # 2nd Crosswalk - 42 spaces East
 N_cw2_S_x = N_cw1_E_x
@@ -97,6 +159,18 @@ N_cw2_E_x = N_cw2_S_x + 4
 N_cw2_E_y = N_cw2_S_y + 42
 #print N_cw2_E_x, N_cw2_E_y
 map[N_cw2_S_x:N_cw2_E_x, N_cw2_S_y:N_cw2_E_y] = 0
+
+Ncw2_loc = [(N_cw2_S_x,N_cw2_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=41:
+        num = N_cw2_S_x + i
+        num2 = N_cw2_S_y +j
+        Ncw2_new = (num,num2)
+        Ncw2_loc.append(Ncw2_new)
+        j=j+1
+    i=i+1
 
 
 # Sidewalk 185 spaces south
@@ -113,6 +187,8 @@ N_sw2_E_x = N_sw2_S_x + 4
 N_sw2_E_y = N_sw2_S_y + 60
 map[N_sw2_S_x:N_sw2_E_x, N_sw2_S_y:N_sw2_E_y] = 0
 
+
+
 # Other side of street to Marta
 # sidewalk 1
 M2_sw1_S_x = N_cw2_S_x
@@ -128,6 +204,20 @@ M2_cw2_S_x = M2_sw1_S_x
 M2_cw2_S_y = M2_sw1_E_y
 M2_cw2_E_x = M2_cw2_S_x + 4
 M2_cw2_E_y = M2_cw2_S_y + 19
+
+
+M2cw2_loc = [(M2_cw2_S_x,M2_cw2_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=41:
+        num = M2_cw2_S_x + i
+        num2 = M2_cw2_S_y +j
+        M2cw2_new = (num,num2)
+        M2cw2_loc.append(M2cw2_new)
+        j=j+1
+    i=i+1
+
 
 map[M2_cw2_S_x:M2_cw2_E_x, M2_cw2_S_y:M2_cw2_E_y] = 0
 
@@ -147,6 +237,18 @@ M2_cw3_E_y = M2_cw3_S_y + 15
 
 map[M2_cw3_S_x:M2_cw3_E_x, M2_cw3_S_y:M2_cw3_E_y] = 0
 
+M2cw3_loc = [(M2_cw3_S_x,M2_cw3_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=41:
+        num = M2_cw3_S_x + i
+        num2 = M2_cw3_S_y +j
+        M2cw3_new = (num,num2)
+        M2cw3_loc.append(M2cw3_new)
+        j=j+1
+    i=i+1
+
 # 3rd Sidewalk
 M2_sw3_S_x = M2_cw3_S_x - 1
 M2_sw3_S_y = M2_cw3_E_y
@@ -161,6 +263,18 @@ M2_cw4_E_x = M2_cw4_S_x + 4
 M2_cw4_E_y = M2_cw4_S_y + 28
 
 map[M2_cw4_S_x:M2_cw4_E_x, M2_cw4_S_y:M2_cw4_E_y] = 0
+
+M2cw4_loc = [(M2_cw4_S_x,M2_cw4_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=41:
+        num = M2_cw4_S_x + i
+        num2 = M2_cw4_S_y +j
+        M2cw4_new = (num,num2)
+        M2cw4_loc.append(M2cw4_new)
+        j=j+1
+    i=i+1
 
 # Crosswalk back up
 M_cw5 =M_cw4_E_y -4
@@ -371,7 +485,7 @@ plt.text(1650,600,labels)
 plt.show()
 Gates = {'Gate A':Aloc,'Gate B':Bloc,'Gate C':Cloc,'Gate D':Dloc,'Gate E':Eloc}
 Exits = {'Marta':Mloc,'Varsity':Vloc,'North Ave':NAloc}
-
+Crosswalks = {'Marta CW1':Mcw1_loc, 'Marta CW2':Mcw2_loc, 'Marta CW3':Mcw3_loc, 'Marta CW4':Mcw4_loc,'North Ave CW1':Ncw1_loc, 'North Ave CW2':Ncw2_loc, 'Marta 2 CW2':M2cw2_loc,'Marta 2 CW3':M2cw3_loc, 'Marta 2 CW4':M2cw4_loc}
 
 
 
