@@ -1,11 +1,13 @@
 # Creating matrix to represent a map of Bobby-Statium and the surrounding areas
 
-# Need to output locations for exits and gates and crosswalks
+
+# Finish exits
+# Look up code for visualization
 import numpy as np
 from matplotlib import pyplot as plt
 
 # Creating empty Map
-map = np.empty((1600, 1600,)) * np.NAN
+map = np.empty((1100, 1600,)) * np.NAN
 
 # Creating pathway to MARTA
 start = 800
@@ -292,6 +294,23 @@ BD_E_S_y = BD_E_E_y - 8
 #print BD_E_S_y, BD_E_S_x
 map[BD_E_S_x:BD_E_E_x, BD_E_S_y:BD_E_E_y] = 0
 
+# Across the street
+BD2_E_E_x = start
+BD2_E_E_y = start +50
+BD2_E_S_x = BD2_E_E_x - 457
+BD2_E_S_y = BD2_E_E_y - 8
+#print BD_E_S_y, BD_E_S_x
+map[BD2_E_S_x:BD2_E_E_x, BD2_E_S_y:BD2_E_E_y] = 0
+# crosswalk
+BD_cw1_S_x = start - 457
+BD_cw1_S_y = start
+BD_cw1_E_x = BD_cw1_S_x + 4
+BD_cw1_E_y = BD_cw1_S_y + 42
+
+map[BD_cw1_S_x:BD_cw1_E_x, BD_cw1_S_y:BD_cw1_E_y] = 0
+print BD_cw1_S_x, BD_cw1_E_x,BD_cw1_S_y, BD_cw1_E_y
+
+
 # South Side  - 4 squares wide 505 long small parking lot at 408
 BD_S_E_x = 804
 BD_S_E_y = 800
@@ -332,7 +351,15 @@ PB_S_y = P_N_E_y -73
 PB_E_x = PB_S_x + 123
 PB_E_y = PB_S_y + 23
 map[PB_S_x:PB_E_x,PB_S_y:PB_E_y] = 0
-print PB_S_x,PB_E_x,PB_S_y,PB_E_y
+#print PB_S_x,PB_E_x,PB_S_y,PB_E_y
+
+# Path to Peters Parking Deck
+PP_S_x = PB_S_x - 267
+PP_S_y = PB_S_y - 11
+PP_E_x = PB_S_x
+PP_E_y = PB_S_y
+map[PP_S_x:PP_E_x,PP_S_y:PP_E_y] = 0
+# print PP_S_x,PP_S_y,PP_E_x,PP_E_y
 
 
 # Corner
@@ -484,6 +511,7 @@ labels = ('Red - Locations \n'
 plt.text(1650,600,labels)
 plt.show()
 Gates = {'Gate A':Aloc,'Gate B':Bloc,'Gate C':Cloc,'Gate D':Dloc,'Gate E':Eloc}
+# print Aloc
 Exits = {'Marta':Mloc,'Varsity':Vloc,'North Ave':NAloc}
 Crosswalks = {'Marta CW1':Mcw1_loc, 'Marta CW2':Mcw2_loc, 'Marta CW3':Mcw3_loc, 'Marta CW4':Mcw4_loc,'North Ave CW1':Ncw1_loc, 'North Ave CW2':Ncw2_loc, 'Marta 2 CW2':M2cw2_loc,'Marta 2 CW3':M2cw3_loc, 'Marta 2 CW4':M2cw4_loc}
 
