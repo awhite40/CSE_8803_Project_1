@@ -338,7 +338,7 @@ BD_cw1_E_x = BD_cw1_S_x + 4
 BD_cw1_E_y = BD_cw1_S_y + 42
 
 map[BD_cw1_S_x:BD_cw1_E_x, BD_cw1_S_y:BD_cw1_E_y] = 0
-print BD_cw1_S_x, BD_cw1_E_x,BD_cw1_S_y, BD_cw1_E_y
+# print BD_cw1_S_x, BD_cw1_E_x,BD_cw1_S_y, BD_cw1_E_y
 
 
 # South Side  - 4 squares wide 505 long small parking lot at 408
@@ -577,12 +577,12 @@ while i<=15:
     Eloc.append(Enew)
     i=i+1
 # print Eloc
-plt.imshow(map)
+#plt.imshow(map)
 #plt.colorbar()
 labels = ('Red - Locations \n'
           'Blue - Sidewalks')
 plt.text(1650,600,labels)
-plt.show()
+#plt.show()
 Gates = {'Gate A':Aloc,'Gate B':Bloc,'Gate C':Cloc,'Gate D':Dloc,'Gate E':Eloc}
 # print Aloc
 Exits = {'Marta':Mloc,'Varsity':Vloc,'North Ave':NAloc, 'Peters Parking Deck':PP_loc, 'East Campus Dorms':EC_loc,'Bus Stop':BS_loc, 'Student Center':SC_loc}

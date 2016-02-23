@@ -7,25 +7,25 @@ from collections import namedtuple
 import matplotlib.animation as manimation
 
 # Code for animaiting the map images
-MapWriter = manimation.writers['map_image']
+MapWriter = manimation.writers['ffmpeg']
 metadata = dict(title='Map Movie')
 writer = MapWriter(fps=2, metadata=metadata)
-fig = map.map
+fig = Map.map
 
 personStruct = namedtuple("personStruct", "index x y status")  # create struct for each person, recording the person's index, position and whether he is active
 active_list = [] 			# list of all people created by the simulation
 m = personStruct(0, 800, 1557, 1)	# create person 0
 active_list.append(m)			# put person 0 into the list
-map.map[800, 800] = 1			# mark the person's position on the map
+Map.map[800, 800] = 1			# mark the person's position on the map
 m = personStruct(1, 801, 800, 1)
 active_list.append(m)
-map.map[801, 800] = 1
+Map.map[801, 800] = 1
 m = personStruct(2, 802, 800, 1)
 active_list.append(m)
-map.map[802, 800] = 1
+Map.map[802, 800] = 1
 m = personStruct(3, 803, 800, 1)
 active_list.append(m)
-map.map[803, 800] = 1
+Map.map[803, 800] = 1
 
 shuffle = [0,1,2,3]	# array of all people in the simulation. will be shuffled later to update in a random order
 total_so_far = 4	# total number of people generated so far
@@ -93,9 +93,9 @@ def move(people_list, k):	# function to move a person
 				Map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
 				Map.map[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
 				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
-
+fig = plt.figure()
 # simulate until all people have exited through marta
-with writer.saving(map, "Map_movie.mp4", 2):
+with writer.saving(fig, "Map_movie.mp4", 2):
     while total_active != 0:
     	random.shuffle(shuffle)			# shuffle the list of people in the simulation so we can update all of them in a random order
     	for person in shuffle:
@@ -110,7 +110,7 @@ with writer.saving(map, "Map_movie.mp4", 2):
     				active_list.append(m)					# put the person in list
     				shuffle.append(total_so_far-1)				# put the person in the shuffle list
     	time = time + 0.5
-        moviewriter.grab_frame								# discrete time step: 0.5s
+        writer.grab_frame()								# discrete time step: 0.5s
 	# print total_active
 print "time is", time
 print "total_so_far is", total_so_far

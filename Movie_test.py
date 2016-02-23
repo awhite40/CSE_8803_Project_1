@@ -20,7 +20,7 @@ plt.ylim(-5, 5)
 
 x0, y0 = 0, 0
 
-with writer.saving(fig, "writer_test.mp4", 100):
+with writer.saving(fig, "writer_test.mp4", fps =100):
     for i in range(100):
         x0 += 0.1 * np.random.randn()
         y0 += 0.1 * np.random.randn()
