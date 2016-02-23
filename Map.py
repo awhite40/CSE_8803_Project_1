@@ -130,6 +130,16 @@ while i<=3:
         j=j+1
     i=i+1
 
+# Corner
+
+corner = np.tri(19,34,-1)
+corner = np.fliplr(corner)
+corner[corner == 0] = 'nan'
+corner[corner == 1] = 0
+s1 = start - 19 - 4
+s2 = start - 34 - 8
+map[s1:start-4,s2:start-8] = corner
+#print s1,s2
 
 # Creating Pathway to NorthAve Apartments
 
@@ -174,6 +184,26 @@ while i<=3:
         j=j+1
     i=i+1
 
+
+# Crosswalk back up
+N_cw3_S_x = M_cw1_S_x
+N_cw3_S_y = 800 + 42
+N_cw3_E_x = N_cw3_S_x + 32
+N_cw3_E_y = N_cw3_S_y + 4
+
+map[N_cw3_S_x:N_cw3_E_x, N_cw3_S_y:N_cw3_E_y] = 0
+
+Ncw3_loc = [(N_cw3_S_x,N_cw3_S_y)]
+i=0
+while i<=3:
+    j=0
+    while j<=31:
+        num = N_cw3_S_x + j
+        num2 = N_cw3_S_y + i
+        Ncw3_new = (num,num2)
+        Ncw3_loc.append(Ncw3_new)
+        j=j+1
+    i=i+1
 
 # Sidewalk 185 spaces south
 N_sw1_S_x = N_cw2_S_x
@@ -362,18 +392,61 @@ map[PP_S_x:PP_E_x,PP_S_y:PP_E_y] = 0
 # print PP_S_x,PP_S_y,PP_E_x,PP_E_y
 
 
-# Corner
-
-corner = np.tri(19,34,-1)
-corner = np.fliplr(corner)
-corner[corner == 0] = 'nan'
-corner[corner == 1] = 0
-s1 = start - 19 - 4
-s2 = start - 34 - 8
-map[s1:start-4,s2:start-8] = corner
-print s1,s2
-
 #Exit locations
+# Peter's exit
+PP_loc = [(PP_S_x,PP_E_y)]
+i=0
+while i<=15:
+    num = PP_S_x + i
+    PPnew = (num,PP_E_y)
+    PP_loc.append(PPnew)
+    map[num, PP_E_y] = 50
+    i=i+1
+plt.text(PP_E_y, PP_S_x, 'Peters Parking Deck')
+
+# Entrance to east campus dorms - 103 spaces north of north ave
+EC_S_x =M_sw1_S_x - 103
+EC_S_y = M_sw1_S_y + 8
+EC_loc = [(EC_S_x, EC_S_y)]
+i=0
+while i<=15:
+    num = EC_S_x + i
+    ECnew = (num,EC_S_y)
+    EC_loc.append(ECnew)
+    map[num, EC_S_y] = 50
+    i=i+1
+plt.text(EC_S_y, EC_S_x, 'East Campus Dorms')
+
+# Bus stop
+BS_S_x =M_sw1_E_x
+BS_S_y = M_sw1_S_y + 8
+BS_loc = [(BS_S_x, BS_S_y)]
+i=0
+while i<=15:
+    num = BS_S_y + i
+    BSnew = (BS_S_x, num)
+    BS_loc.append(BSnew)
+    map[BS_S_x,num] = 50
+    i=i+1
+plt.text(BS_S_y, BS_S_x, 'Bus Stop')
+
+
+# To the student Center - 187 squares north of North Ave on Cherry Street
+SC_S_x =Cherry_E_x - 187
+SC_S_y = Cherry_S_y
+SC_loc = [(SC_S_x, SC_S_y)]
+i=0
+while i<=15:
+    num = SC_S_x + i
+    SCnew = (num,SC_S_y)
+    SC_loc.append(SCnew)
+    map[num, SC_S_y] = 50
+    i=i+1
+plt.text(SC_S_y, SC_S_x, 'To the Student Center')
+
+
+
+
 
 # Marta
 M1 = M_cw4_S_x - 40
@@ -436,7 +509,7 @@ while i<=15:
     Cnew = (num,num2)
     Cloc.append(Cnew)
     i=i+1
-
+plt.text(C2, C1-20, 'Gate C')
 
 # Gate A - sixteen spaces wide
 A1 = start - 6
@@ -444,7 +517,7 @@ A2 = A1 + 2
 A3 = start - 109
 A4 = A3 + 16
 map[A1:A2,A3:A4] = 50
-plt.text(A3, A1-15, 'Gate A')
+plt.text(A3-100, A1-15, 'Gate A')
 Aloc = [(A2,A3)]
 i=1
 while i<=15:
@@ -495,7 +568,7 @@ E2 = E1 + 12
 E3 = start
 E4 = E3 + 2
 map[E1:E2,E3:E4] = 50
-plt.text(E3+30,E1+30, 'Gate E')
+plt.text(E3+10,E1+30, 'Gate E')
 Eloc = [(E2,E3)]
 i=1
 while i<=15:
@@ -512,8 +585,8 @@ plt.text(1650,600,labels)
 plt.show()
 Gates = {'Gate A':Aloc,'Gate B':Bloc,'Gate C':Cloc,'Gate D':Dloc,'Gate E':Eloc}
 # print Aloc
-Exits = {'Marta':Mloc,'Varsity':Vloc,'North Ave':NAloc}
-Crosswalks = {'Marta CW1':Mcw1_loc, 'Marta CW2':Mcw2_loc, 'Marta CW3':Mcw3_loc, 'Marta CW4':Mcw4_loc,'North Ave CW1':Ncw1_loc, 'North Ave CW2':Ncw2_loc, 'Marta 2 CW2':M2cw2_loc,'Marta 2 CW3':M2cw3_loc, 'Marta 2 CW4':M2cw4_loc}
+Exits = {'Marta':Mloc,'Varsity':Vloc,'North Ave':NAloc, 'Peters Parking Deck':PP_loc, 'East Campus Dorms':EC_loc,'Bus Stop':BS_loc, 'Student Center':SC_loc}
+Crosswalks = {'Marta CW1':Mcw1_loc, 'Marta CW2':Mcw2_loc, 'Marta CW3':Mcw3_loc, 'Marta CW4':Mcw4_loc,'North Ave CW1':Ncw1_loc, 'North Ave CW2':Ncw2_loc, 'North Ave CW3':Mcw3_loc, 'Marta 2 CW2':M2cw2_loc,'Marta 2 CW3':M2cw3_loc, 'Marta 2 CW4':M2cw4_loc}
 
 
 
