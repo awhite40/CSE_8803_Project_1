@@ -583,10 +583,10 @@ labels = ('Red - Locations \n'
           'Blue - Sidewalks')
 plt.text(1650,600,labels)
 #plt.show()
-Gates = {'Gate A':Aloc,'Gate B':Bloc,'Gate C':Cloc,'Gate D':Dloc,'Gate E':Eloc}
+Gates = {'Gate_A':Aloc,'Gate_B':Bloc,'Gate_C':Cloc,'Gate_D':Dloc,'Gate_E':Eloc}
 # print Aloc
-Exits = {'Marta':Mloc,'Varsity':Vloc,'North Ave':NAloc, 'Peters Parking Deck':PP_loc, 'East Campus Dorms':EC_loc,'Bus Stop':BS_loc, 'Student Center':SC_loc}
-Crosswalks = {'Marta CW1':Mcw1_loc, 'Marta CW2':Mcw2_loc, 'Marta CW3':Mcw3_loc, 'Marta CW4':Mcw4_loc,'North Ave CW1':Ncw1_loc, 'North Ave CW2':Ncw2_loc, 'North Ave CW3':Mcw3_loc, 'Marta 2 CW2':M2cw2_loc,'Marta 2 CW3':M2cw3_loc, 'Marta 2 CW4':M2cw4_loc}
+Exits = {'Marta':Mloc,'Varsity':Vloc,'North_Ave':NAloc, 'Peters_Parking_Deck':PP_loc, 'East_Campus_Dorms':EC_loc,'Bus_Stop':BS_loc, 'Student_Center':SC_loc}
+Crosswalks = {'Marta_CW1':Mcw1_loc, 'Marta_CW2':Mcw2_loc, 'Marta_CW3':Mcw3_loc, 'Marta_CW4':Mcw4_loc,'North_Ave_CW1':Ncw1_loc, 'North_Ave_CW2':Ncw2_loc, 'North_Ave_CW3':Mcw3_loc, 'Marta_2_CW2':M2cw2_loc,'Marta_2_CW3':M2cw3_loc, 'Marta_2_CW4':M2cw4_loc}
 
 
 
