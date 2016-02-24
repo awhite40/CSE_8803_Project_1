@@ -1,140 +1,172 @@
 import numpy as np
 import random
 import math
-import Map
+import map
 from matplotlib import pyplot as plt
 from collections import namedtuple
-import matplotlib.animation as manimation
-from PIL import Image
-from moviepy.editor import VideoClip
-
-Map_p = Map.map
-im = Map_p
-im.resize((im.shape[0], im.shape[1], 1))
-frame_for_time_t = np.repeat(im.astype(np.uint8), 3, 2)
-plt.imshow(frame_for_time_t)
-plt.show()
-# Code for animaiting the map images
-MapWriter = manimation.writers['ffmpeg']
-metadata = dict(title='Map Movie')
-writer = MapWriter(fps=24, metadata=metadata)
-#fig = Map.map
-def make_frame(t):
-    """ returns an image of the frame at time t """
-    # ... create the frame with any library
-    im = Map_p
-    im.resize((im.shape[0], im.shape[1], 1))
-    frame_for_time_t = np.repeat(im.astype(np.uint8), 3, 2)
-    #print frame_for_time_t.shape
-    plt.imshow(frame_for_time_t)
-    return frame_for_time_t # (Height x Width x 3) Numpy array
 
 
+MartaFF = np.loadtxt('Marta_floor_field.txt')
+VarsityFF = np.loadtxt('Varsity_floor_field.txt')
+NorthAveFF = np.loadtxt('NorthAve_floor_field.txt')
+PetersParkingDeckFF = np.loadtxt('PetersParkingDeck_floor_field.txt')
+EastCampusDormsFF = np.loadtxt('EastCampusDorms_floor_field.txt')
+BusStopFF = np.loadtxt('BusStop_floor_field.txt')
+StudentCenterFF = np.loadtxt('StudentCenter_floor_field.txt')
 
-personStruct = namedtuple("personStruct", "index x y status")  # create struct for each person, recording the person's index, position and whether he is active
-active_list = [] 			# list of all people created by the simulation
-m = personStruct(0, 800, 1557, 1)	# create person 0
-active_list.append(m)			# put person 0 into the list
-Map.map[800, 800] = 1			# mark the person's position on the map
-m = personStruct(1, 801, 800, 1)
+def findFF(destination):
+	if destination == 'Marta':
+		FF = MartaFF
+	elif destination == 'Varsity':
+		FF = VarsityFF
+	elif destination == 'North_Ave':
+		FF = NorthAveFF
+	elif destination == 'Peters_Parking_Deck':
+		FF = PetersParkingDeckFF
+	elif destination == 'East_Campus_Dorms':
+		FF = EastCampusDormsFF
+	elif destination == 'Bus_Stop':
+		FF = BusStopFF
+	elif destination == 'Student_Center':
+		FF = StudentCenterFF
+	return FF
+
+
+personStruct = namedtuple("personStruct", "index gate destin x y status")
+active_list = []
+m = personStruct(0, 'C', 'NorthAve', 800, 800, 1)
 active_list.append(m)
-Map.map[801, 800] = 1
-m = personStruct(2, 802, 800, 1)
+map.map[800, 800] = 1
+m = personStruct(1, 'C', 'Marta', 801, 800, 1)
 active_list.append(m)
-Map.map[802, 800] = 1
-m = personStruct(3, 803, 800, 1)
+map.map[801, 800] = 1
+m = personStruct(2, 'C', 'Peters_Parking_Deck', 802, 800, 1)
 active_list.append(m)
-Map.map[803, 800] = 1
+map.map[802, 800] = 1
+m = personStruct(3, 'C', 'East_Campus_Dorms', 803, 800, 1)
+active_list.append(m)
+map.map[803, 800] = 1
 
-shuffle = [0,1,2,3]	# array of all people in the simulation. will be shuffled later to update in a random order
-total_so_far = 4	# total number of people generated so far
-total_active = 4	# total number of people currently active in the simulation
-time = 0.0		# initial time
-birth = [(800, 800), (801, 800), (802, 800), (803, 800)]	# cells that can generate people
-marta = [(800,1558), (801,1558), (802,1558), (803, 1558)]	# cells that people can disappear
+shuffle = [0,1,2,3]
+# shuffle = [0]
+total_so_far = 4
+total_active = 4
+# total_active = 1
+time = 0.5
 
-def move(people_list, k):	# function to move a person
+def validneighbors(position, matrix):
+	(x,y) = position
+	neighbors = [(x-1,y+1), (x, y+1), (x+1, y+1), (x-1, y), (x+1, y), (x-1, y-1), (x,y-1), (x+1, y-1)]
+	neighbors = [p for p in neighbors if matrix[p] == 0]
+	return neighbors
+
+def move(people_list, k, time):
 	global total_active
-	if people_list[k].status == 1:	# if the kth person is currently active, then move him
+	if people_list[k].status == 1:
+		floorfield = findFF(people_list[k].destin)
+		(x,y) = (people_list[k].x, people_list[k].y)
 
-		if people_list[k].y == 1556:   # if the person is one cell away from the marta, then move him into one of the three available cells on y = 1557
-			move_target = 0
-			P = [(people_list[k].x-1, people_list[k].y + 1), (people_list[k].x, people_list[k].y + 1), (people_list[k].x + 1, people_list[k].y + 1)]  # list of the three possible cells
-			for i in range(len(P)):
-				if Map_p[P[i]] == 0:
-					move_target = P[i]
-					break
-			if move_target != 0:
-				Map_p[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
-				Map_p[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
-				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
+		if floorfield[x,y] <= 9:			# if the person is at the gate, then make him disappear
+			map.map[x,y] = 0.0				# clear the previous cell in the map
+			people_list[k] = people_list[k]._replace(status = 0)	# clear the person's position and make him inactive
+			total_active = total_active - 1									# reduce one active person
+			print "person number", k, "has arrived at", people_list[k].destin, "at time", time
 
-		elif people_list[k].y == 1557:		# if the person is right next to the marta entrance, make him disappear
-			Map_p[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
-			people_list[k] = people_list[k]._replace(x=0, y=0, status = 0)			# clear the position of the person to 0
-			total_active = total_active - 1							# minus 1 active person in the simulation
-
-		else:	# if the person is not at the end of the road, do normal move
+		else:							# if the person is in the middle of the map
 			infinity = float("inf")
-			destination = (infinity, infinity) # the cloest block of marta gate to the people_list[k]
-			for exit in marta:
-				if math.sqrt((exit[0] - people_list[k].x)**2 + (exit[1] - people_list[k].y)**2) < math.sqrt((destination[0] - people_list[k].x)**2 + (destination[1] - people_list[k].y)**2):
-					destination = exit
+			P = validneighbors((x,y), map.map)
+			if len(P) > 0: # if the people_list[k] can move
+				# M = []
+				# for i in range(len(P)):
+					# R = floorfield[P[i]]  # distance between the possible cell and the cloest block of marta gate to the people_list[k]
+				# 	M.append(1.0 / R)
+	
+				# rand = random.random()	# random number from uniform distribution
+				# N = 1.0 / np.sum(M)		# normalization constant
+				# m_sum = 0.0				# cumulative probability
+				# for i in range(len(M)):
+				# 	M[i] = M[i] * N 						# normalize probability of moving to P[i]
+				# 	m_sum = m_sum + M[i]					# get cumulative probability of moving to P[i]
+				# 	if rand < m_sum:						# once have find the P[i], break out of the loop
+				# 		move_target = P[i]
+				# 		break
 
-			# the five cells that the people_list[k] can move to
-			P = [(people_list[k].x - 1, people_list[k].y + 1), (people_list[k].x, people_list[k].y + 1), (people_list[k].x + 1, people_list[k].y + 1), (people_list[k].x - 1, people_list[k].y), (people_list[k].x + 1, people_list[k].y)]
+				if len(P)==1:
+					move_target = P[0]
+				elif len(P)>1:
+					D = [floorfield[P[i]] for i in range(len(P))]
+					temp_target = [p for (d,p) in sorted(zip(D,P), key=lambda pair: pair[0])][0]
+					if floorfield[temp_target] <= floorfield[x,y]:
+						move_target = temp_target
+					else:
+						move_target = (x,y)
 
-			M = []
-			for i in range(len(P)):
-				R = math.sqrt((P[i][0] - destination[0])**2 + (P[i][1] - destination[1])**2)  # distance between the possible cell and the cloest block of marta gate to the people_list[k]
-				if Map_p[P[i]] == 0:  # if the cell is not blocked, calculate M
-					M.append(1.0 / R)
-				else:					# if the cell is blocked, M = 0
-					M.append(0.0)
+				map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
+				map.map[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
+				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
 
-			can_move = False
-			for m in M:					# if at least one M[i] is not zero, then the people_list[k] can move
-				if m != 0.0:
-					can_move = True
+
+def waitforcw(people_list, k, closedcws, cwstart, cwend):
+	if people_list[k].status == 1:
+
+		floorfield = findFF(people_list[k].destin)
+		(x,y) = (people_list[k].x, people_list[k].y)
+		for cw in closedcws:
+			startloc = cwstart[cw]
+			endloc = cwend[cw]
+			cwstartvalue = floorfield[startloc]
+			# print 'cwstartvalue is', cwstartvalue
+			cwendvalue = floorfield[endloc]
+			# print 'endloc is', endloc
+			# print 'cwendvalue is', cwendvalue
+
+			if cwstartvalue - cwendvalue > 5:
+				if floorfield[x,y] > cwstartvalue  and floorfield[x,y] < cwstartvalue+5:
+					people_list[k] = people_list[k]._replace(status = 2)
+					print 'person', k, 'ran into a red light at', (x,y)
+					break
+			elif cwendvalue - cwstartvalue > 5:
+				if floorfield[x,y] > cwendvalue  and floorfield[x,y] < cwendvalue+5:
+					people_list[k] = people_list[k]._replace(status = 2)
+					print 'person', k, 'ran into a red light at', (x,y)
 					break
 
-			if can_move == True:		# if the people_list[k] can move
-				rand = random.random()	# random number from uniform distribution
-				N = 1.0 / np.sum(M)		# normalization constant
-				m_sum = 0.0				# cumulative probability
-				for i in range(len(M)):
-					if M[i] != 0.0:
-						M[i] = M[i] * N 						# normalize probability of moving to P[i]
-						m_sum = m_sum + M[i]					# get cumulative probability of moving to P[i]
-						if rand < m_sum:						# once have find the P[i], break out of the loop
-							move_target = P[i]
-							break
-				Map_p[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
-				Map_p[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
-				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
-#fig = plt.figure()
-#fig = plt.subplot(Map.map)
-#fig = plt.figure()
-#plt.show()
-# simulate until all people have exited through marta
-#with writer.saving(fig, "Map_movie.mp4", 2):
-while total_active != 0:
-    random.shuffle(shuffle)			# shuffle the list of people in the simulation so we can update all of them in a random order
-    for person in shuffle:
-        move(active_list, person)	# move each person
+def greenlight(people_list, k):
+	(x,y) = (people_list[k].x, people_list[k].y)
+	if people_list[k].status == 2:
+		people_list[k] = people_list[k]._replace(status = 1)
+		print 'person', k, 'continued walking at', (x,y)
 
-    if time < 10:				# for the first 10 seconds, people will be generated on the four cells (if they are available) every 0.5 second
-        for place in birth:
-            if Map_p[place[0], place[1]] == 0:
-                total_so_far = total_so_far + 1				# update total number of people so far
-                total_active = total_active + 1				# update total number of active people
-                m = personStruct(total_so_far, place[0], place[1], 1)	# create a peroson
-                active_list.append(m)					# put the person in list
-                shuffle.append(total_so_far-1)				# put the person in the shuffle list
-    time = time + 0.5
-#writer.grab_frame()								# discrete time step: 0.5s
+cwclosetime = 0.0
+cwopentime = 0.0
+while total_active != 0:
+	if time%240 == 0:
+		cwclosetime = time
+		cwopentime = cwclosetime + 60
+		closedcws = random.sample(map.Crosswalks, 3)
+
+	random.shuffle(shuffle)
+	for person in shuffle:
+		if time < cwopentime and time >= cwclosetime:
+			waitforcw(active_list, person, closedcws, map.cwstart, map.cwend)
+		elif time == cwopentime:
+			greenlight(active_list, person)
+		move(active_list, person, time)
+	# if time < 10:
+	# 	for place in birth:
+	# 		if map.map[place[0], place[1]] == 0:
+	# 			total_so_far = total_so_far + 1
+	# 			total_active = total_active + 1
+	# 			m = personStruct(total_so_far, place[0], place[1], 1)
+	# 			active_list.append(m)
+	# 			shuffle.append(total_so_far-1)
+	time = time + 0.5
 	# print total_active
-animation = VideoClip(make_frame, duration=time)
-animation.write_videofile("my_animation.mp4", fps=2)
-print "time is", time
-print "total_so_far is", total_so_far
+# print "time is", time
+# print "total number of people simulated is", total_so_far
+
+
+
+
+
+

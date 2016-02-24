@@ -583,6 +583,41 @@ labels = ('Red - Locations \n'
           'Blue - Sidewalks')
 plt.text(1650,600,labels)
 plt.show()
+martacw1start = (802, 800)
+martacw1end = (802, 841)
+
+martacw2start = (802, 1018)
+martacw2end = (802, 1036)
+
+martacw3start = (802, 1299)
+martacw3end = (802, 1313)
+
+martacw4start = (802, 1531)
+martacw4end = (802, 1557)
+
+northavecw1start = (800, 797)
+northavecw1end = (831, 797)
+
+northavecw2start = (833, 796)
+northavecw2end = (833, 837)
+
+northavecw3start = (802, 1299)
+northavecw3end = (802, 1313)
+
+marta2cw2start = (834, 1018)
+marta2cw2end = (834, 1059)
+
+marta2cw3start = (834, 1299)
+marta2cw3end = (834, 1340)
+
+marta2cw4start = (834, 1531)
+marta2cw4end = (834, 1572)
+
+cwstart = {'Marta_CW1':martacw1start, 'Marta_CW2':martacw2start, 'Marta_CW3':martacw3start, 'Marta_CW4':martacw4start,'North_Ave_CW1':northavecw1start, 'North_Ave_CW2':northavecw2start,
+'North_Ave_CW3':northavecw3start, 'Marta_2_CW2':marta2cw2start,'Marta_2_CW3':marta2cw3start, 'Marta_2_CW4':marta2cw4start}
+cwend = {'Marta_CW1':martacw1end, 'Marta_CW2':martacw2end, 'Marta_CW3':martacw3end, 'Marta_CW4':martacw4end,'North_Ave_CW1':northavecw1end, 'North_Ave_CW2':northavecw2end,
+'North_Ave_CW3':northavecw3end, 'Marta_2_CW2':marta2cw2end,'Marta_2_CW3':marta2cw3end, 'Marta_2_CW4':marta2cw4end}
+
 Gates = {'Gate_A':Aloc,'Gate_B':Bloc,'Gate_C':Cloc,'Gate_D':Dloc,'Gate_E':Eloc}
 # print Aloc
 Exits = {'Marta':Mloc,'Varsity':Vloc,'North_Ave':NAloc, 'Peters_Parking_Deck':PP_loc, 'East_Campus_Dorms':EC_loc,'Bus_Stop':BS_loc, 'Student_Center':SC_loc}
