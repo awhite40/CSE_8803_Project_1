@@ -5,12 +5,31 @@ import Map
 from matplotlib import pyplot as plt
 from collections import namedtuple
 import matplotlib.animation as manimation
+from PIL import Image
+from moviepy.editor import VideoClip
 
+Map_p = Map.map
+im = Map_p
+im.resize((im.shape[0], im.shape[1], 1))
+frame_for_time_t = np.repeat(im.astype(np.uint8), 3, 2)
+plt.imshow(frame_for_time_t)
+plt.show()
 # Code for animaiting the map images
 MapWriter = manimation.writers['ffmpeg']
 metadata = dict(title='Map Movie')
-writer = MapWriter(fps=2, metadata=metadata)
-fig = Map.map
+writer = MapWriter(fps=24, metadata=metadata)
+#fig = Map.map
+def make_frame(t):
+    """ returns an image of the frame at time t """
+    # ... create the frame with any library
+    im = Map_p
+    im.resize((im.shape[0], im.shape[1], 1))
+    frame_for_time_t = np.repeat(im.astype(np.uint8), 3, 2)
+    #print frame_for_time_t.shape
+    plt.imshow(frame_for_time_t)
+    return frame_for_time_t # (Height x Width x 3) Numpy array
+
+
 
 personStruct = namedtuple("personStruct", "index x y status")  # create struct for each person, recording the person's index, position and whether he is active
 active_list = [] 			# list of all people created by the simulation
@@ -42,16 +61,16 @@ def move(people_list, k):	# function to move a person
 			move_target = 0
 			P = [(people_list[k].x-1, people_list[k].y + 1), (people_list[k].x, people_list[k].y + 1), (people_list[k].x + 1, people_list[k].y + 1)]  # list of the three possible cells
 			for i in range(len(P)):
-				if Map.map[P[i]] == 0:
+				if Map_p[P[i]] == 0:
 					move_target = P[i]
 					break
 			if move_target != 0:
-				Map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
-				Map.map[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
+				Map_p[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
+				Map_p[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
 				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
 
 		elif people_list[k].y == 1557:		# if the person is right next to the marta entrance, make him disappear
-			Map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
+			Map_p[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
 			people_list[k] = people_list[k]._replace(x=0, y=0, status = 0)			# clear the position of the person to 0
 			total_active = total_active - 1							# minus 1 active person in the simulation
 
@@ -68,7 +87,7 @@ def move(people_list, k):	# function to move a person
 			M = []
 			for i in range(len(P)):
 				R = math.sqrt((P[i][0] - destination[0])**2 + (P[i][1] - destination[1])**2)  # distance between the possible cell and the cloest block of marta gate to the people_list[k]
-				if Map.map[P[i]] == 0:  # if the cell is not blocked, calculate M
+				if Map_p[P[i]] == 0:  # if the cell is not blocked, calculate M
 					M.append(1.0 / R)
 				else:					# if the cell is blocked, M = 0
 					M.append(0.0)
@@ -90,27 +109,32 @@ def move(people_list, k):	# function to move a person
 						if rand < m_sum:						# once have find the P[i], break out of the loop
 							move_target = P[i]
 							break
-				Map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
-				Map.map[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
+				Map_p[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
+				Map_p[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
 				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
-fig = plt.figure()
+#fig = plt.figure()
+#fig = plt.subplot(Map.map)
+#fig = plt.figure()
+#plt.show()
 # simulate until all people have exited through marta
-with writer.saving(fig, "Map_movie.mp4", 2):
-    while total_active != 0:
-    	random.shuffle(shuffle)			# shuffle the list of people in the simulation so we can update all of them in a random order
-    	for person in shuffle:
-    		move(active_list, person)	# move each person
+#with writer.saving(fig, "Map_movie.mp4", 2):
+while total_active != 0:
+    random.shuffle(shuffle)			# shuffle the list of people in the simulation so we can update all of them in a random order
+    for person in shuffle:
+        move(active_list, person)	# move each person
 
-    	if time < 10:				# for the first 10 seconds, people will be generated on the four cells (if they are available) every 0.5 second
-    		for place in birth:
-    			if Map.map[place[0], place[1]] == 0:
-    				total_so_far = total_so_far + 1				# update total number of people so far
-    				total_active = total_active + 1				# update total number of active people
-    				m = personStruct(total_so_far, place[0], place[1], 1)	# create a peroson
-    				active_list.append(m)					# put the person in list
-    				shuffle.append(total_so_far-1)				# put the person in the shuffle list
-    	time = time + 0.5
-        writer.grab_frame()								# discrete time step: 0.5s
+    if time < 10:				# for the first 10 seconds, people will be generated on the four cells (if they are available) every 0.5 second
+        for place in birth:
+            if Map_p[place[0], place[1]] == 0:
+                total_so_far = total_so_far + 1				# update total number of people so far
+                total_active = total_active + 1				# update total number of active people
+                m = personStruct(total_so_far, place[0], place[1], 1)	# create a peroson
+                active_list.append(m)					# put the person in list
+                shuffle.append(total_so_far-1)				# put the person in the shuffle list
+    time = time + 0.5
+#writer.grab_frame()								# discrete time step: 0.5s
 	# print total_active
+animation = VideoClip(make_frame, duration=time)
+animation.write_videofile("my_animation.mp4", fps=2)
 print "time is", time
 print "total_so_far is", total_so_far
