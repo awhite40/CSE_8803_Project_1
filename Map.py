@@ -400,7 +400,7 @@ while i<=15:
     num = PP_S_x + i
     PPnew = (num,PP_E_y)
     PP_loc.append(PPnew)
-    map[num, PP_E_y] = 0
+    map[num, PP_E_y] = 50
     i=i+1
 plt.text(PP_E_y, PP_S_x, 'Peters Parking Deck')
 
@@ -413,7 +413,7 @@ while i<=15:
     num = EC_S_x + i
     ECnew = (num,EC_S_y)
     EC_loc.append(ECnew)
-    map[num, EC_S_y] = 0
+    map[num, EC_S_y] = 50
     i=i+1
 plt.text(EC_S_y, EC_S_x, 'East Campus Dorms')
 
@@ -426,7 +426,7 @@ while i<=15:
     num = BS_S_y + i
     BSnew = (BS_S_x, num)
     BS_loc.append(BSnew)
-    map[BS_S_x,num] = 0
+    map[BS_S_x,num] = 50
     i=i+1
 plt.text(BS_S_y, BS_S_x, 'Bus Stop')
 
@@ -440,7 +440,7 @@ while i<=15:
     num = SC_S_x + i
     SCnew = (num,SC_S_y)
     SC_loc.append(SCnew)
-    map[num, SC_S_y] = 0
+    map[num, SC_S_y] = 50
     i=i+1
 plt.text(SC_S_y, SC_S_x, 'To the Student Center')
 
@@ -454,7 +454,7 @@ M2 = M_cw4_S_x
 M3 = M_cw4_E_y
 M4 = M_cw4_E_y + 40
 # print M1, M2, M3, M4
-map[M1:M2, M3:M4] = 0
+map[M1:M2, M3:M4] = 50
 plt.text(M3, M1, 'Marta')
 Mloc = [(M_cw4_S_x,M_cw4_E_y)]
 i=1
@@ -471,7 +471,7 @@ V2 = M_sw2_S_x
 V3 = M_sw2_E_y
 V4 = M_sw2_E_y + 40
 # print V1, V2, V3, V4
-map[V1:V2, V3:V4] = 0
+map[V1:V2, V3:V4] = 50
 plt.text(V3, V1, 'Varsity')
 Vloc = [(V2,V3)]
 i=1
@@ -487,7 +487,7 @@ NA2 = N_sw2_S_x
 NA3 = N_sw2_E_y
 NA4 = N_sw2_E_y + 40
 # print NA1, NA2, NA3, NA4
-map[NA1:NA2, NA3:NA4] = 0
+map[NA1:NA2, NA3:NA4] = 50
 plt.text(NA3, NA1, 'North Ave Apt')
 NAloc = [(N_sw2_S_x,N_sw2_E_y)]
 i=1
@@ -516,7 +516,7 @@ A1 = start - 6
 A2 = A1 + 2
 A3 = start - 109
 A4 = A3 + 16
-map[A1:A2,A3:A4] = 0
+map[A1:A2,A3:A4] = 50
 plt.text(A3-100, A1-15, 'Gate A')
 Aloc = [(A2,A3)]
 i=1
@@ -533,7 +533,7 @@ B1 = PB_E_x - 12
 B2 = PB_E_x
 B3 = PB_E_y
 B4 = PB_E_y + 1
-map[B1:B2,B3:B4] = 0
+map[B1:B2,B3:B4] = 50
 plt.text(B3 - 50, B1+50, 'Gate B')
 Bloc = [(B2,B3)]
 i=1
@@ -550,7 +550,7 @@ D1 = P_N_E_x
 D2 = P_N_E_x + 1
 D3 = P_N_S_y - 55
 D4 = D3 + 12
-map[D1:D2,D3:D4] = 0
+map[D1:D2,D3:D4] = 50
 plt.text(D3,D1+30, 'Gate D')
 Dloc = [(D2,D3)]
 i=1
@@ -567,7 +567,7 @@ E1 =BD_E_S_x + 100
 E2 = E1 + 12
 E3 = start
 E4 = E3 + 2
-map[E1:E2,E3:E4] = 0
+map[E1:E2,E3:E4] = 50
 plt.text(E3+10,E1+30, 'Gate E')
 Eloc = [(E2,E3)]
 i=1
