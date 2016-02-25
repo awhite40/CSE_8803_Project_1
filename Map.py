@@ -413,7 +413,7 @@ while i<=15:
     num = EC_S_x + i
     ECnew = (num,EC_S_y-1)
     EC_loc.append(ECnew)
-    print map[ECnew]
+    # print map[ECnew]
     map[num, EC_S_y-1] = 50
     i=i+1
 plt.text(EC_S_y, EC_S_x, 'East Campus Dorms', fontsize=22)
@@ -463,7 +463,7 @@ i=1
 while i<=4:
     num = M_cw4_S_x + i
     Mnew = (num,M_cw4_E_y-1)
-    print 'Marta', map[Mnew]
+    # print 'Marta', map[Mnew]
     Mloc.append(Mnew)
     i=i+1
 # print Mloc
@@ -499,7 +499,7 @@ i=1
 while i<=3:
     num = N_sw2_S_x + i
     NAnew = (num,N_sw2_E_y-1)
-    print 'NA', map[NAnew]
+    # print 'NA', map[NAnew]
     NAloc.append(NAnew)
     i=i+1
 
@@ -533,7 +533,7 @@ while i<=15:
     num = A3+i
     Anew = (A2,num)
     Aloc.append(Anew)
-    print 'A', map[Anew]
+    #print 'A', map[Anew]
     i=i+1
 # print Aloc
 
@@ -553,7 +553,7 @@ while i<=15:
     num = B2 - i
     Bnew = (num,B3-1)
     Bloc.append(Bnew)
-    print 'B', map[Bnew]
+    #print 'B', map[Bnew]
     map[Bnew]=50
     i=i+1
 # print Bloc
@@ -572,7 +572,7 @@ while i<=15:
     num = D3+i
     Dnew = (D2-1,num)
     Dloc.append(Dnew)
-    print 'D', map[Dnew]
+    #print 'D', map[Dnew]
     i=i+1
 # print Dloc
 
@@ -590,7 +590,7 @@ while i<=15:
     num = E2 + i
     Enew = (num,E3)
     Eloc.append(Enew)
-    print 'E', map[Enew]
+    #print 'E', map[Enew]
     i=i+1
 # print Eloc
 plt.imshow(map)
@@ -628,7 +628,7 @@ marta2cw3end = (834, 1340)
 
 marta2cw4start = (834, 1531)
 marta2cw4end = (834, 1572)
-
+#print Aloc
 cwstart = {'Marta_CW1':martacw1start, 'Marta_CW2':martacw2start, 'Marta_CW3':martacw3start, 'Marta_CW4':martacw4start,'North_Ave_CW1':northavecw1start, 'North_Ave_CW2':northavecw2start,
 'North_Ave_CW3':northavecw3start, 'Marta_2_CW2':marta2cw2start,'Marta_2_CW3':marta2cw3start, 'Marta_2_CW4':marta2cw4start}
 cwend = {'Marta_CW1':martacw1end, 'Marta_CW2':martacw2end, 'Marta_CW3':martacw3end, 'Marta_CW4':martacw4end,'North_Ave_CW1':northavecw1end, 'North_Ave_CW2':northavecw2end,
@@ -639,7 +639,7 @@ Gates = {'Gate_A':Aloc,'Gate_B':Bloc,'Gate_C':Cloc,'Gate_D':Dloc,'Gate_E':Eloc}
 Exits = {'Marta':Mloc,'Varsity':Vloc,'North_Ave':NAloc, 'Peters_Parking_Deck':PP_loc, 'East_Campus_Dorms':EC_loc,'Bus_Stop':BS_loc, 'Student_Center':SC_loc}
 Crosswalks = {'Marta_CW1':Mcw1_loc, 'Marta_CW2':Mcw2_loc, 'Marta_CW3':Mcw3_loc, 'Marta_CW4':Mcw4_loc,'North_Ave_CW1':Ncw1_loc, 'North_Ave_CW2':Ncw2_loc, 'North_Ave_CW3':Mcw3_loc, 'Marta_2_CW2':M2cw2_loc,'Marta_2_CW3':M2cw3_loc, 'Marta_2_CW4':M2cw4_loc}
 
-print Bloc
+#print Bloc
 
 
 
