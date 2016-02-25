@@ -116,9 +116,9 @@ def people_gen():
                     elif dest_range >=0.84 and dest_range < 1.00:
                         destination = 'Student_Center'
                         
-                    m = personStruct(i,gate_name,destination,800, 1557, 1)    # create person 0
-                    print "i: "+str(i) + " gate_name:"+ str(gate_name) + " destination:"+ str(destination) + " x:" +str(x) + " y:" +str(y) + " status: " +str(1)
-
+                    m = personStruct(i,gate_name,destination,x,y,status)    # create person 0
+                    #print "i: "+str(i) + " gate_name:"+ str(gate_name) + " destination:"+ str(destination) + " x:" +str(x) + " y:" +str(y) + " status: " +str(1)
+                    print m  #verifying that everything is random
                     #determine x and y
                         
                     active_list.append(m)
