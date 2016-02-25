@@ -14,7 +14,7 @@ from matplotlib import pyplot as plt
 from collections import namedtuple
 
 
-def people_gen():
+def people_gen(base):
             gate_count = 5
             people_per_gate = 100
             destination_count = 7
@@ -26,7 +26,6 @@ def people_gen():
             global total_active
             personStruct = namedtuple("personStruct", "index gate destin x y status")  # create struct for each person, with index, destination, position,active(1)or not(0)
             active_list = []  
-            i=1
             for i in range((total_people)):
                     x = y = 0
                     #gate_range = random.random()
@@ -37,24 +36,26 @@ def people_gen():
                         #grid_range = random.random()
                         grid_range = merst.myrandom()
                         for j in range(16):
-                                x = (796)
+                                #x = (796)
+                                x= Map.Aloc[(j)][0]
                                 #print j
                                 #print j/16.0
                                 #print ((j+1)/16.0)
                                 if grid_range >=(j/16.0) and grid_range < ((j+1)/16.0):
-                                    y = (691 + j)    
+                                    y = ( Map.Aloc[(j)][1]) 
+                                    #print Aloc[(j)][1]
                         
                     elif gate_range >=0.2 and gate_range < 0.4:
                         gate_name = 'Gate_B'
                         #grid_range_B = random.random()
                         grid_range_B = merst.myrandom()
                         for jb in range(16):
-                                y = (563) #verified
+                                y = ( Map.Bloc[(jb)][1])  #verified
                                 #print jb
                                 #print j/16.0
                                 #print ((j+1)/16.0)
                                 if grid_range_B >=(jb/16.0) and grid_range_B < ((jb+1)/16.0):
-                                    x = (470 - jb)  #minus for decrement
+                                    x = Map.Bloc[(jb)][0]  #minus for decrement
                                     #print '@#$%'
                                     #print x
                     elif gate_range >=0.4 and gate_range < 0.6:
@@ -65,30 +66,30 @@ def people_gen():
                                 #y = (757) #Need to verify
                                 
                                 if grid_range_C >=(jc/16.0) and grid_range_C < ((jc+1)/16.0):
-                                    x = (796 + jc)
-                                    y = (758 - jc)#Need to verify
+                                    x = Map.Cloc[(jc)][0]
+                                    y = Map.Cloc[(jc)][1]#Need to verify
                     elif gate_range >=0.6 and gate_range < 0.8:
                         gate_name = 'Gate_D'
                         #grid_range_D = random.random() 
                         grid_range_D = merst.myrandom()
                         for jd in range(16):
-                                x = (422) #Need to verify
+                                x = Map.Dloc[(jd)][0]#Need to verify
                                 #print jd
                                 #print j/16.0
                                 #print ((j+1)/16.0)
                                 if grid_range_D >=(jd/16.0) and grid_range_D < ((jd+1)/16.0):
-                                    y = (666+jd)  #Need to verify -check
+                                    y = ( Map.Dloc[(jd)][1])  #Need to verify -check
                     elif gate_range >=0.8 and gate_range < 1.0:
                         gate_name = 'Gate_E'
                         #grid_range_E = random.random()
                         grid_range_E = merst.myrandom()
                         for je in range(16):
-                                y = (799) #Need to verify
+                                y = ( Map.Eloc[(je)][1]) #Need to verify
                                 #print je
                                 #print j/16.0
                                 #print ((j+1)/16.0)
                                 if grid_range_E >=(je/16.0) and grid_range_E < ((je+1)/16.0):
-                                    y = (455+je)  #Need to verify -check
+                                    x = Map.Eloc[(je)][0]   #Need to verify -check
                         
                     
                     #dest_range = random.random()
@@ -112,7 +113,7 @@ def people_gen():
                     #print "i: "+str(i) + " gate_name:"+ str(gate_name) + " destination:"+ str(destination) + " x:" +str(x) + " y:" +str(y) + " status: " +str(1) #try
                     if Map.map[x,y] == 0:  
                         m = personStruct(i,gate_name,destination,x,y,status)    # create person 0
-                        
+                        base = base + 1
                         
                         print m  #verifying that everything is random
                     #determine x and y
@@ -122,4 +123,4 @@ def people_gen():
             return active_list
 
 
-new_active_list = people_gen()
+new_active_list = people_gen(0)
