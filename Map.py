@@ -402,7 +402,7 @@ while i<=15:
     PP_loc.append(PPnew)
     map[num, PP_E_y] = 50
     i=i+1
-plt.text(PP_E_y, PP_S_x, 'Peters Parking Deck')
+plt.text(PP_E_y, PP_S_x, 'Peters Parking Deck', fontsize=22)
 
 # Entrance to east campus dorms - 103 spaces north of north ave
 EC_S_x =M_sw1_S_x - 103
@@ -416,7 +416,7 @@ while i<=15:
     print map[ECnew]
     map[num, EC_S_y-1] = 50
     i=i+1
-plt.text(EC_S_y, EC_S_x, 'East Campus Dorms')
+plt.text(EC_S_y, EC_S_x, 'East Campus Dorms', fontsize=22)
 
 # Bus stop
 BS_S_x =M_sw1_E_x
@@ -429,7 +429,7 @@ while i<=15:
     BS_loc.append(BSnew)
     map[BS_S_x,num] = 50
     i=i+1
-plt.text(BS_S_y, BS_S_x, 'Bus Stop')
+plt.text(BS_S_y, BS_S_x, 'Bus Stop', fontsize=22)
 
 
 # To the student Center - 187 squares north of North Ave on Cherry Street
@@ -443,7 +443,7 @@ while i<=15:
     SC_loc.append(SCnew)
     map[num, SC_S_y] = 50
     i=i+1
-plt.text(SC_S_y, SC_S_x, 'To the Student Center')
+plt.text(SC_S_y, SC_S_x, 'To the Student Center', fontsize=22)
 
 
 
@@ -456,8 +456,9 @@ M3 = M_cw4_E_y
 M4 = M_cw4_E_y + 40
 # print M1, M2, M3, M4
 map[M1:M2, M3:M4] = 50
-plt.text(M3, M1, 'Marta')
-Mloc = [(M_cw4_S_x,M_cw4_E_y-1)]
+
+plt.text(M3, M1, 'Marta', fontsize=22)
+Mloc = [(M_cw4_S_x,M_cw4_E_y)]
 i=1
 while i<=4:
     num = M_cw4_S_x + i
@@ -474,7 +475,7 @@ V3 = M_sw2_E_y
 V4 = M_sw2_E_y + 40
 # print V1, V2, V3, V4
 map[V1:V2, V3:V4] = 50
-plt.text(V3, V1, 'Varsity')
+plt.text(V3, V1, 'Varsity', fontsize=22)
 Vloc = [(V2,V3)]
 i=1
 while i<=15:
@@ -491,8 +492,9 @@ NA3 = N_sw2_E_y
 NA4 = N_sw2_E_y + 40
 # print NA1, NA2, NA3, NA4
 map[NA1:NA2, NA3:NA4] = 50
-plt.text(NA3, NA1, 'North Ave Apt')
-NAloc = [(N_sw2_S_x,N_sw2_E_y-1)]
+
+plt.text(NA3, NA1, 'North Ave Apt', fontsize=22)
+NAloc = [(N_sw2_S_x,N_sw2_E_y)]
 i=1
 while i<=3:
     num = N_sw2_S_x + i
@@ -515,7 +517,7 @@ while i<=15:
     Cloc.append(Cnew)
     map[Cnew] = 0
     i=i+1
-plt.text(C2, C1-20, 'Gate C')
+plt.text(C2, C1-20, 'Gate C', fontsize=22)
 
 # Gate A - sixteen spaces wide
 A1 = start - 6
@@ -523,7 +525,7 @@ A2 = A1 + 2
 A3 = start - 109
 A4 = A3 + 16
 map[A1:A2,A3:A4] = 50
-plt.text(A3-100, A1-15, 'Gate A')
+plt.text(A3-100, A1-15, 'Gate A', fontsize=22)
 Aloc = [(A2,A3)]
 i=1
 while i<=15:
@@ -540,9 +542,11 @@ B1 = PB_E_x - 30
 B2 = PB_E_x
 B3 = PB_E_y
 B4 = PB_E_y + 1
-#map[B1:B2,B3:B4] = 50
-plt.text(B3 - 50, B1+50, 'Gate B')
-Bloc = [(B2,B3-1)]
+
+map[B1:B2,B3:B4] = 50
+plt.text(B3 - 50, B1+50, 'Gate B', fontsize=22)
+Bloc = [(B2,B3)]
+
 i=1
 while i<=15:
     num = B2 - i
@@ -560,8 +564,8 @@ D2 = P_N_E_x
 D3 = P_N_S_y - 55
 D4 = D3 + 12
 map[D1:D2,D3:D4] = 50
-plt.text(D3,D1+30, 'Gate D')
-Dloc = [(D2-1,D3)]
+plt.text(D3,D1+30, 'Gate D', fontsize=22)
+Dloc = [(D2,D3)]
 i=1
 while i<=15:
     num = D3+i
@@ -578,7 +582,7 @@ E2 = E1 + 12
 E3 = start-1
 E4 = E3 + 2
 map[E1:E2,E3:E4] = 50
-plt.text(E3+10,E1+30, 'Gate E')
+plt.text(E3+10,E1+30, 'Gate E', fontsize=22)
 Eloc = [(E2,E3)]
 i=1
 while i<=15:
@@ -592,7 +596,7 @@ plt.imshow(map)
 #plt.colorbar()
 labels = ('Red - Locations \n'
           'Blue - Sidewalks')
-plt.text(1650,600,labels)
+plt.text(1650,600,labels, fontsize=22)
 plt.show()
 martacw1start = (802, 800)
 martacw1end = (802, 841)
