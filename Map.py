@@ -546,7 +546,7 @@ B4 = PB_E_y + 1
 
 map[B1:B2,B3:B4] = 50
 plt.text(B3 - 50, B1+50, 'Gate B', fontsize=22)
-Bloc = [(B2,B3)]
+Bloc = [(B2,B3-1)]
 
 i=1
 while i<=15:
@@ -566,7 +566,7 @@ D3 = P_N_S_y - 55
 D4 = D3 + 12
 map[D1:D2,D3:D4] = 50
 plt.text(D3,D1+30, 'Gate D', fontsize=22)
-Dloc = [(D2,D3)]
+Dloc = [(D2-1,D3)]
 i=1
 while i<=15:
     num = D3+i
@@ -584,7 +584,7 @@ E3 = start-1
 E4 = E3 + 2
 map[E1:E2,E3:E4] = 50
 plt.text(E3+10,E1+30, 'Gate E', fontsize=22)
-Eloc = [(E2,E3)]
+Eloc = [(E2-1,E3)]
 i=1
 while i<=15:
     num = E2 + i
@@ -639,6 +639,7 @@ Gates = {'Gate_A':Aloc,'Gate_B':Bloc,'Gate_C':Cloc,'Gate_D':Dloc,'Gate_E':Eloc}
 Exits = {'Marta':Mloc,'Varsity':Vloc,'North_Ave':NAloc, 'Peters_Parking_Deck':PP_loc, 'East_Campus_Dorms':EC_loc,'Bus_Stop':BS_loc, 'Student_Center':SC_loc}
 Crosswalks = {'Marta_CW1':Mcw1_loc, 'Marta_CW2':Mcw2_loc, 'Marta_CW3':Mcw3_loc, 'Marta_CW4':Mcw4_loc,'North_Ave_CW1':Ncw1_loc, 'North_Ave_CW2':Ncw2_loc, 'North_Ave_CW3':Mcw3_loc, 'Marta_2_CW2':M2cw2_loc,'Marta_2_CW3':M2cw3_loc, 'Marta_2_CW4':M2cw4_loc}
 
+print Bloc
 
 
 
