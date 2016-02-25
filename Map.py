@@ -553,8 +553,8 @@ while i<=15:
     num = B2 - i
     Bnew = (num,B3-1)
     Bloc.append(Bnew)
-    #print 'B', map[Bnew]
-    map[Bnew]=50
+    print 'B', map[Bnew]
+    #map[num,B3]=50
     i=i+1
 # print Bloc
 
