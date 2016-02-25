@@ -517,6 +517,7 @@ while i<=15:
     Cloc.append(Cnew)
     map[Cnew] = 0
     i=i+1
+    j=j+1
 plt.text(C2, C1-20, 'Gate C', fontsize=22)
 
 # Gate A - sixteen spaces wide
