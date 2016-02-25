@@ -49,12 +49,12 @@ def people_gen():
                         #grid_range_B = random.random()
                         grid_range_B = merst.myrandom()
                         for jb in range(16):
-                                y = (564) #verified
+                                y = (563) #verified
                                 #print jb
                                 #print j/16.0
                                 #print ((j+1)/16.0)
                                 if grid_range_B >=(jb/16.0) and grid_range_B < ((jb+1)/16.0):
-                                    x = (470 + jb)  #Need to verify
+                                    x = (470 - jb)  #minus for decrement
                                     #print '@#$%'
                                     #print x
                     elif gate_range >=0.4 and gate_range < 0.6:
@@ -62,18 +62,17 @@ def people_gen():
                         #grid_range_C = random.random() 
                         grid_range_C = merst.myrandom()
                         for jc in range(16):
-                                y = (757) #Need to verify
-                                #print jc
-                                #print j/16.0
-                                #print ((j+1)/16.0)
+                                #y = (757) #Need to verify
+                                
                                 if grid_range_C >=(jc/16.0) and grid_range_C < ((jc+1)/16.0):
-                                    y = (796+jc)  #Need to verify
+                                    x = (796 + jc)
+                                    y = (758 - jc)#Need to verify
                     elif gate_range >=0.6 and gate_range < 0.8:
                         gate_name = 'Gate_D'
                         #grid_range_D = random.random() 
                         grid_range_D = merst.myrandom()
                         for jd in range(16):
-                                x = (424) #Need to verify
+                                x = (422) #Need to verify
                                 #print jd
                                 #print j/16.0
                                 #print ((j+1)/16.0)
@@ -84,7 +83,7 @@ def people_gen():
                         #grid_range_E = random.random()
                         grid_range_E = merst.myrandom()
                         for je in range(16):
-                                y = (800) #Need to verify
+                                y = (799) #Need to verify
                                 #print je
                                 #print j/16.0
                                 #print ((j+1)/16.0)
@@ -109,8 +108,8 @@ def people_gen():
                     elif dest_range >=0.84 and dest_range < 1.00:
                         destination = 'Student_Center'
                         
-                    print Map.map[x,y]
-                    print "i: "+str(i) + " gate_name:"+ str(gate_name) + " destination:"+ str(destination) + " x:" +str(x) + " y:" +str(y) + " status: " +str(1) #try
+                    #print Map.map[x,y]
+                    #print "i: "+str(i) + " gate_name:"+ str(gate_name) + " destination:"+ str(destination) + " x:" +str(x) + " y:" +str(y) + " status: " +str(1) #try
                     if Map.map[x,y] == 0:  
                         m = personStruct(i,gate_name,destination,x,y,status)    # create person 0
                         
