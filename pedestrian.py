@@ -1,7 +1,7 @@
 import numpy as np
 import random
-import math
-import map
+#import math
+import Map
 from matplotlib import pyplot as plt
 from collections import namedtuple
 
@@ -36,16 +36,16 @@ personStruct = namedtuple("personStruct", "index gate destin x y status")
 active_list = []
 m = personStruct(0, 'C', 'NorthAve', 800, 800, 1)
 active_list.append(m)
-map.map[800, 800] = 1
+Map.map[800, 800] = 1
 m = personStruct(1, 'C', 'Marta', 801, 800, 1)
 active_list.append(m)
-map.map[801, 800] = 1
+Map.map[801, 800] = 1
 m = personStruct(2, 'C', 'Peters_Parking_Deck', 802, 800, 1)
 active_list.append(m)
-map.map[802, 800] = 1
+Map.map[802, 800] = 1
 m = personStruct(3, 'C', 'East_Campus_Dorms', 803, 800, 1)
 active_list.append(m)
-map.map[803, 800] = 1
+Map.map[803, 800] = 1
 
 shuffle = [0,1,2,3]
 # shuffle = [0]
@@ -67,20 +67,20 @@ def move(people_list, k, time):
 		(x,y) = (people_list[k].x, people_list[k].y)
 
 		if floorfield[x,y] <= 9:			# if the person is at the gate, then make him disappear
-			map.map[x,y] = 0.0				# clear the previous cell in the map
+			Map.map[x,y] = 0.0				# clear the previous cell in the map
 			people_list[k] = people_list[k]._replace(status = 0)	# clear the person's position and make him inactive
 			total_active = total_active - 1									# reduce one active person
 			print "person number", k, "has arrived at", people_list[k].destin, "at time", time
 
 		else:							# if the person is in the middle of the map
 			infinity = float("inf")
-			P = validneighbors((x,y), map.map)
+			P = validneighbors((x,y), Map.map)
 			if len(P) > 0: # if the people_list[k] can move
 				# M = []
 				# for i in range(len(P)):
 					# R = floorfield[P[i]]  # distance between the possible cell and the cloest block of marta gate to the people_list[k]
 				# 	M.append(1.0 / R)
-	
+
 				# rand = random.random()	# random number from uniform distribution
 				# N = 1.0 / np.sum(M)		# normalization constant
 				# m_sum = 0.0				# cumulative probability
@@ -101,8 +101,8 @@ def move(people_list, k, time):
 					else:
 						move_target = (x,y)
 
-				map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
-				map.map[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
+				Map.map[people_list[k].x, people_list[k].y] = 0.0				# clear the previous cell in the map
+				Map.map[move_target[0], move_target[1]] = 1.0	# block the newly occupied cell
 				people_list[k] = people_list[k]._replace(x=move_target[0], y=move_target[1])
 
 
@@ -143,12 +143,12 @@ while total_active != 0:
 	if time%240 == 0:
 		cwclosetime = time
 		cwopentime = cwclosetime + 60
-		closedcws = random.sample(map.Crosswalks, 3)
+		closedcws = random.sample(Map.Crosswalks, 3)
 
 	random.shuffle(shuffle)
 	for person in shuffle:
 		if time < cwopentime and time >= cwclosetime:
-			waitforcw(active_list, person, closedcws, map.cwstart, map.cwend)
+			waitforcw(active_list, person, closedcws, Map.cwstart, Map.cwend)
 		elif time == cwopentime:
 			greenlight(active_list, person)
 		move(active_list, person, time)
