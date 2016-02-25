@@ -6,8 +6,9 @@ Created on Mon Feb 22 00:42:06 2016
 """
 
 import numpy as np
-import random
+#import random
 import math
+import merst
 #import map
 from matplotlib import pyplot as plt
 from collections import namedtuple
@@ -28,13 +29,15 @@ def people_gen():
             i=1
             for i in range((total_people)):
                     x = y = 0
-                    gate_range = random.random() 
+                    #gate_range = random.random()
+                    gate_range = merst.myrandom()
+                    #print gate_range
                     if gate_range >= 0 and gate_range < 0.2:
                         gate_name = 'Gate_A'
-                        grid_range = random.random() 
+                        #grid_range = random.random()
+                        grid_range = merst.myrandom()
                         """
                         if grid_range >=0 and grid_range < (1/16):
-                            print grid_range
                             x = (start-4) 
                             y = (start - 109 + 1)
                         elif grid_range >=(1/16) and grid_range < (2/16):
@@ -52,7 +55,8 @@ def people_gen():
                         
                     elif gate_range >=0.2 and gate_range < 0.4:
                         gate_name = 'Gate_B'
-                        grid_range_B = random.random() 
+                        #grid_range_B = random.random()
+                        grid_range_B = merst.myrandom()
                         for jb in range(16):
                                 x = (470) #Need to verify
                                 #print jb
@@ -62,7 +66,8 @@ def people_gen():
                                     y = (start - 109 + jb+1)  #Need to verify
                     elif gate_range >=0.4 and gate_range < 0.6:
                         gate_name = 'Gate_C'
-                        grid_range_C = random.random() 
+                        #grid_range_C = random.random() 
+                        grid_range_C = merst.myrandom()
                         for jc in range(16):
                                 x = (796) #Need to verify
                                 #print jc
@@ -72,7 +77,8 @@ def people_gen():
                                     y = (758+jc)  #Need to verify
                     elif gate_range >=0.6 and gate_range < 0.8:
                         gate_name = 'Gate_D'
-                        grid_range_D = random.random() 
+                        #grid_range_D = random.random() 
+                        grid_range_D = merst.myrandom()
                         for jd in range(16):
                                 x = (start + 81 -457) #Need to verify
                                 #print jd
@@ -82,7 +88,8 @@ def people_gen():
                                     y = (200+jd)  #Need to verify -check
                     elif gate_range >=0.8 and gate_range < 1.0:
                         gate_name = 'Gate_E'
-                        grid_range_E = random.random() 
+                        #grid_range_E = random.random()
+                        grid_range_E = merst.myrandom()
                         for je in range(16):
                                 x = (start + 112) #Need to verify
                                 #print je
@@ -92,7 +99,8 @@ def people_gen():
                                     y = (300+je)  #Need to verify -check
                         
                     
-                    dest_range = random.random() 
+                    #dest_range = random.random()
+                    dest_range = merst.myrandom()
                     if dest_range >= 0 and dest_range < 0.14:
                         destination = 'Marta'
                     elif dest_range >=0.14 and dest_range < 0.28:
@@ -109,7 +117,7 @@ def people_gen():
                         destination = 'Student_Center'
                         
                     m = personStruct(i,gate_name,destination,800, 1557, 1)    # create person 0
-                    print "i is: "+str(i) + " gate_name is:"+ str(gate_name) + " destination is:"+ str(destination) + " x is:" +str(x) + " y is:" +str(y) + "status is: " +str(1)
+                    print "i: "+str(i) + " gate_name:"+ str(gate_name) + " destination:"+ str(destination) + " x:" +str(x) + " y:" +str(y) + " status: " +str(1)
 
                     #determine x and y
                         
