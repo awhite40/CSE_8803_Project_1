@@ -394,11 +394,11 @@ map[PP_S_x:PP_E_x,PP_S_y:PP_E_y] = 0
 
 #Exit locations
 # Peter's exit
-PP_loc = [(PP_S_x,PP_E_y)]
+PP_loc = [(PP_S_x,PP_E_y-1)]
 i=0
 while i<=15:
     num = PP_S_x + i
-    PPnew = (num,PP_E_y)
+    PPnew = (num,PP_E_y-1)
     PP_loc.append(PPnew)
     map[num, PP_E_y] = 50
     i=i+1
@@ -407,24 +407,25 @@ plt.text(PP_E_y, PP_S_x, 'Peters Parking Deck')
 # Entrance to east campus dorms - 103 spaces north of north ave
 EC_S_x =M_sw1_S_x - 103
 EC_S_y = M_sw1_S_y + 8
-EC_loc = [(EC_S_x, EC_S_y)]
+EC_loc = [(EC_S_x, EC_S_y-1)]
 i=0
 while i<=15:
     num = EC_S_x + i
-    ECnew = (num,EC_S_y)
+    ECnew = (num,EC_S_y-1)
     EC_loc.append(ECnew)
-    map[num, EC_S_y] = 50
+    print map[ECnew]
+    map[num, EC_S_y-1] = 50
     i=i+1
 plt.text(EC_S_y, EC_S_x, 'East Campus Dorms')
 
 # Bus stop
 BS_S_x =M_sw1_E_x
 BS_S_y = M_sw1_S_y + 8
-BS_loc = [(BS_S_x, BS_S_y)]
+BS_loc = [(BS_S_x-1, BS_S_y)]
 i=0
 while i<=15:
     num = BS_S_y + i
-    BSnew = (BS_S_x, num)
+    BSnew = (BS_S_x-1, num)
     BS_loc.append(BSnew)
     map[BS_S_x,num] = 50
     i=i+1
@@ -434,11 +435,11 @@ plt.text(BS_S_y, BS_S_x, 'Bus Stop')
 # To the student Center - 187 squares north of North Ave on Cherry Street
 SC_S_x =Cherry_E_x - 187
 SC_S_y = Cherry_S_y
-SC_loc = [(SC_S_x, SC_S_y)]
+SC_loc = [(SC_S_x, SC_S_y+1)]
 i=0
 while i<=15:
     num = SC_S_x + i
-    SCnew = (num,SC_S_y)
+    SCnew = (num,SC_S_y+1)
     SC_loc.append(SCnew)
     map[num, SC_S_y] = 50
     i=i+1
@@ -456,18 +457,19 @@ M4 = M_cw4_E_y + 40
 # print M1, M2, M3, M4
 map[M1:M2, M3:M4] = 50
 plt.text(M3, M1, 'Marta')
-Mloc = [(M_cw4_S_x,M_cw4_E_y)]
+Mloc = [(M_cw4_S_x,M_cw4_E_y-1)]
 i=1
-while i<=3:
+while i<=4:
     num = M_cw4_S_x + i
-    Mnew = (num,M_cw4_E_y)
+    Mnew = (num,M_cw4_E_y-1)
+    print 'Marta', map[Mnew]
     Mloc.append(Mnew)
     i=i+1
 # print Mloc
 
 # Varsity
 V1 = M_sw2_S_x - 40
-V2 = M_sw2_S_x
+V2 = M_sw2_S_x +1
 V3 = M_sw2_E_y
 V4 = M_sw2_E_y + 40
 # print V1, V2, V3, V4
@@ -478,6 +480,7 @@ i=1
 while i<=15:
     num = V3+i
     Vnew = (V2,num)
+    print 'Vars',map[Vnew]
     Vloc.append(Vnew)
     i=i+1
 
@@ -489,11 +492,12 @@ NA4 = N_sw2_E_y + 40
 # print NA1, NA2, NA3, NA4
 map[NA1:NA2, NA3:NA4] = 50
 plt.text(NA3, NA1, 'North Ave Apt')
-NAloc = [(N_sw2_S_x,N_sw2_E_y)]
+NAloc = [(N_sw2_S_x,N_sw2_E_y-1)]
 i=1
 while i<=3:
     num = N_sw2_S_x + i
-    NAnew = (num,N_sw2_E_y)
+    NAnew = (num,N_sw2_E_y-1)
+    print 'NA', map[NAnew]
     NAloc.append(NAnew)
     i=i+1
 
@@ -503,11 +507,13 @@ C1 = 796
 C2 = 758
 Cloc = [(C1,C2)]
 i=1
+j=1
 while i<=15:
-    num = C1+i
-    num2 = C2 -1
+    num = C1 + i
+    num2 = C2 - j
     Cnew = (num,num2)
     Cloc.append(Cnew)
+    map[Cnew] = 0
     i=i+1
 plt.text(C2, C1-20, 'Gate C')
 
@@ -524,40 +530,44 @@ while i<=15:
     num = A3+i
     Anew = (A2,num)
     Aloc.append(Anew)
+    print 'A', map[Anew]
     i=i+1
 # print Aloc
 
 
 # Gate B
-B1 = PB_E_x - 12
+B1 = PB_E_x - 30
 B2 = PB_E_x
 B3 = PB_E_y
 B4 = PB_E_y + 1
-map[B1:B2,B3:B4] = 50
+#map[B1:B2,B3:B4] = 50
 plt.text(B3 - 50, B1+50, 'Gate B')
-Bloc = [(B2,B3)]
+Bloc = [(B2,B3-1)]
 i=1
 while i<=15:
-    num = B2 + i
-    Bnew = (num,B3)
+    num = B2 - i
+    Bnew = (num,B3-1)
     Bloc.append(Bnew)
+    print 'B', map[Bnew]
+    map[Bnew]=50
     i=i+1
 # print Bloc
 
 
 # Gate D
 D1 = P_N_E_x
-D2 = P_N_E_x + 1
+D2 = P_N_E_x
 D3 = P_N_S_y - 55
 D4 = D3 + 12
 map[D1:D2,D3:D4] = 50
 plt.text(D3,D1+30, 'Gate D')
-Dloc = [(D2,D3)]
+Dloc = [(D2-1,D3)]
 i=1
 while i<=15:
     num = D3+i
-    Dnew = (D2,num)
+    Dnew = (D2-1,num)
     Dloc.append(Dnew)
+    print 'D', map[Dnew]
     i=i+1
 # print Dloc
 
@@ -565,7 +575,7 @@ while i<=15:
 # Gate E
 E1 =BD_E_S_x + 100
 E2 = E1 + 12
-E3 = start
+E3 = start-1
 E4 = E3 + 2
 map[E1:E2,E3:E4] = 50
 plt.text(E3+10,E1+30, 'Gate E')
@@ -575,6 +585,7 @@ while i<=15:
     num = E2 + i
     Enew = (num,E3)
     Eloc.append(Enew)
+    print 'E', map[Enew]
     i=i+1
 # print Eloc
 plt.imshow(map)
